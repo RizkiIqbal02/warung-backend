@@ -59,7 +59,7 @@ class CategoryController extends Controller
 
         try {
             if ($category) {
-                return response()->json(['message' => 'success fetching data', 'data' => $category->with('products')->get(), 'status' => 200], 200);
+                return response()->json(['message' => 'success fetching data', 'data' => $category->with('products')->find($category->id), 'status' => 200], 200);
             } else {
                 return response()->json(['message' => 'Category not found', 'data' => null], 404);
             }

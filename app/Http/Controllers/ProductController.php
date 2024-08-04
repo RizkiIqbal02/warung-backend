@@ -30,14 +30,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
-            $validated = $request->validate([
+            $request->validate([
                 'name' => 'required',
                 'barcode' => 'required',
                 'quantity' => 'required',
                 'price' => 'required',
                 'category_id' => 'required',
             ]);
-            $product = Product::create($validated);
+            $product = Product::create($request->all());
             return response()->json(['message' => 'success creating data', 'data' => $product, 'status' => 201], 201);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th->getMessage()], 400);
